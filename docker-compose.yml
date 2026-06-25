@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  flappy-ai:
+    build: .
+    image: flappy-bird-ai
+    container_name: flappy-ai-container
+    volumes:
+      - .:/app # Mount thư mục hiện tại vào /app để code và model weights được lưu lại ra ngoài
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Bạn có thể thay đổi command ở đây để chạy train hoặc evaluate
+    command: xvfb-run -s "-screen 0 640x480x24" python src/main.py --train --episodes 500
