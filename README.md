@@ -1,14 +1,22 @@
-# Flappy Bird AI — Deep Q-Network + Computer Vision + Hand Gesture Control
+# Flappy Bird AI — Deep Q-Network + Computer Vision 
 
 <div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-orange?logo=pytorch)](https://pytorch.org)
 [![Gymnasium](https://img.shields.io/badge/Gymnasium-RL-green)](https://gymnasium.farama.org)
-[![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10-blueviolet)](https://mediapipe.dev)
 
 **Ứng dụng Deep Reinforcement Learning (DQN) và Computer Vision vào game Flappy Bird.**  
 Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes.
+
+### 🎮 Demo Video
+
+<video width="400" controls>
+  <source src="videos/demo_gameplay_final.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+**🏆 Best Score: 17 pipes | 📊 Mean Score: 2.40**
 
 </div>
 
@@ -18,8 +26,7 @@ Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes
 
 Dự án xây dựng một AI agent thông minh cho game Flappy Bird với hai mô-đun chính:
 
-1. **Deep Q-Network (DQN)** — Agent tự học bằng Reinforcement Learning với Neural Network (PyTorch), sử dụng các kỹ thuật tiên tiến: Double DQN, Experience Replay, Target Network.
-2. **Hand Gesture Control** — Điều khiển con chim bằng cử động tay qua webcam (MediaPipe Tasks API).
+1. **Deep Q-Network (DQN)** — Agent tự học bằng Reinforcement Learning với Neural Network (PyTorch), sử dụng các kỹ thuật tiên tiến: Double DQN, Experience Replay, Target Network
 
 ### Kết Quả Đạt Được
 
@@ -36,16 +43,13 @@ Dự án xây dựng một AI agent thông minh cho game Flappy Bird với hai m
 ┌──────────────────────────────────────────────────────────────┐
 │                     Flappy Bird AI                           │
 │                                                              │
-│   ┌──────────┐    ┌──────────────────┐    ┌──────────────┐  │
-│   │  Game    │───▶│  Observation     │───▶│  DQN Agent   │  │
-│   │ (Pygame) │    │  Vector (12 dim) │    │  (PyTorch)   │  │
-│   │          │◀───│  use_lidar=False │◀───│              │  │
-│   └──────────┘    └──────────────────┘    └──────────────┘  │
+│   ┌──────────┐    ┌──────────────────┐    ┌──────────────┐   │
+│   │  Game    │───▶│  Observation     │───▶│  DQN Agent   │   │
+│   │ (Pygame) │    │  Vector (12 dim) │    │  (PyTorch)   │   │
+│   │          │◀───│  use_lidar=False │◀───│              │   │
+│   └──────────┘    └──────────────────┘    └──────────────┘   │
 │                                                              │
-│   ┌──────────────────────────────────────────────────────┐   │
-│   │           Hand Gesture Mode (tùy chọn)               │   │
-│   │   Webcam → MediaPipe → HandController → Action {0,1} │   │
-│   └──────────────────────────────────────────────────────┘   │
+│                                                              │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -73,7 +77,6 @@ Mini-batch (128) → Double DQN Update → Target Network
 
 - Python 3.12+
 - macOS / Linux
-- Webcam (cho Hand Gesture Mode)
 
 ### Cài Đặt Môi Trường
 
@@ -93,7 +96,6 @@ pip install -r requirements.txt
 | `torch` | 2.x | Neural Network, DQN |
 | `gymnasium` | latest | RL environment |
 | `flappy-bird-gymnasium` | latest | Game environment |
-| `mediapipe` | 0.10.x | Hand gesture detection |
 | `opencv-python` | 4.x | Computer Vision, webcam |
 | `numpy` | latest | Tính toán |
 | `matplotlib` | latest | Visualize learning curves |
@@ -131,18 +133,6 @@ python src/main.py --evaluate --episodes 50 --agent dqn
 # Ghi 22 giây gameplay → videos/demo_gameplay.mp4
 python record_demo.py
 ```
-
-### 4. Điều Khiển Bằng Tay (Hand Gesture)
-
-```bash
-# Điều khiển Flappy Bird bằng cử động tay qua webcam
-python -m src.play_hand
-```
-
-**Gesture:**
-- 🖐️ **Mở bàn tay (≥ 3 ngón duỗi)** → FLAP (chim bay lên)
-- ✊ **Nắm tay (< 3 ngón duỗi)** → FALL (chim rơi)
-
 ### 5. Test Môi Trường
 
 ```bash
@@ -163,8 +153,6 @@ Flappy_bird_Project/
 │   │   └── __init__.py
 │   ├── environment/
 │   │   └── flappy_env.py         # Gymnasium wrapper (obs/frame mode)
-│   ├── gesture/
-│   │   └── hand_controller.py    # MediaPipe Hand Gesture Controller
 │   ├── training/
 │   │   ├── trainer.py            # Training loop (DQN-optimized)
 │   │   └── rewards.py            # Reward Shaping
@@ -176,7 +164,6 @@ Flappy_bird_Project/
 │   ├── utils/
 │   │   ├── logger.py             # CSV training logger
 │   │   └── visualization.py      # Matplotlib learning curves
-│   ├── play_hand.py              # Hand gesture gameplay entrypoint
 │   └── main.py                   # CLI entrypoint
 ├── checkpoints/
 │   ├── best_model.pt             # Model tốt nhất (score 17)
@@ -241,17 +228,6 @@ Pipeline CV ban đầu (dùng khi `use_obs=False`):
 | Bounding Box | Lấy tọa độ chim và pipe |
 | EMA Velocity Estimation | Ước tính vận tốc chim qua 2 frames |
 
-### Hand Gesture Control (MediaPipe)
-
-| Thành phần | Chi tiết |
-|---|---|
-| Model | `hand_landmarker.task` (Google MediaPipe) |
-| Landmarks | 21 điểm 3D trên bàn tay |
-| API | MediaPipe Tasks API (>= 0.10) |
-| Gesture | Đếm ngón tay duỗi: ≥3 → FLAP, <3 → FALL |
-| Debounce | Cooldown 150ms giữa 2 lần flap |
-| FPS | ~30 FPS real-time |
-
 ---
 
 ## Kết Quả Training
@@ -275,6 +251,7 @@ Linear Q + CV (5000 ep):  ████░░░░░░░░░░░░░░
 DQN + Obs (3000 ep):      ████████████████████ max = 17
 ```
 
+<<<<<<< HEAD
 > **Kết luận**: Chất lượng state representation (12-dim obs) quan trọng hơn độ phức tạp thuật toán. Chuyển từ CV (3 dims, noisy) → gym obs (12 dims, chính xác) cải thiện 17× chỉ với 60% số episodes.
 
 ---
@@ -294,6 +271,9 @@ Kết quả trong video:
 - Episode 2: score = 2
 - Episode 4: **score = 5** ✅
 - Best episode: **score = 17** (trong training)
+=======
+> **Kết luận**: Chất lượng state representation (12-dim obs) quan trọng hơn độ phức tạp thuật toán. Chuyển từ CV (3 dims, noisy) → gym obs (12 dims, chính xác) cải thiện hiệu suất đáng kể.
+>>>>>>> c8e86840eabd3af93ff5d5098c7a43f9e6f8c42a
 
 ---
 
@@ -308,5 +288,4 @@ Xem [`RESEARCH_NOTES.md`](RESEARCH_NOTES.md) để tìm hiểu chi tiết về t
 - Mnih et al. (2015) — *Human-level control through deep reinforcement learning* — Nature
 - Van Hasselt et al. (2016) — *Deep Reinforcement Learning with Double Q-learning* — AAAI
 - [flappy-bird-gymnasium](https://github.com/markub3327/flappy-bird-gymnasium)
-- [MediaPipe Hand Landmarker](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
 - [Spinning Up in Deep RL — OpenAI](https://spinningup.openai.com)
