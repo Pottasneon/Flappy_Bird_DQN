@@ -1,11 +1,10 @@
-# Flappy Bird AI — Deep Q-Network + Computer Vision + Hand Gesture Control
+# Flappy Bird AI — Deep Q-Network + Computer Vision 
 
 <div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-orange?logo=pytorch)](https://pytorch.org)
 [![Gymnasium](https://img.shields.io/badge/Gymnasium-RL-green)](https://gymnasium.farama.org)
-[![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10-blueviolet)](https://mediapipe.dev)
 
 **Ứng dụng Deep Reinforcement Learning (DQN) và Computer Vision vào game Flappy Bird.**  
 Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes.
@@ -28,7 +27,6 @@ Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes
 Dự án xây dựng một AI agent thông minh cho game Flappy Bird với hai mô-đun chính:
 
 1. **Deep Q-Network (DQN)** — Agent tự học bằng Reinforcement Learning với Neural Network (PyTorch), sử dụng các kỹ thuật tiên tiến: Double DQN, Experience Replay, Target Network
-2. **Hand Gesture Control** — Điều khiển con chim bằng cử động tay qua webcam (MediaPipe Tasks API).
 
 ### Kết Quả Đạt Được
 
