@@ -11,10 +11,13 @@ Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes
 
 ### 🎮 Demo Video
 
-<video width="400" controls>
-  <source src="videos/demo_gameplay_final.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+Click vào ảnh bên dưới để xem video demo gameplay của DQN agent:
+
+<div align="center">
+
+[![Flappy Bird DQN Demo](https://img.youtube.com/vi/J0Cci3VAWKc/maxresdefault.jpg)](https://youtube.com/shorts/J0Cci3VAWKc)
+
+</div>
 
 **🏆 Best Score: 17 pipes | 📊 Mean Score: 2.40**
 
