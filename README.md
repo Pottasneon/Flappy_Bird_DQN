@@ -268,5 +268,4 @@ Xem [`RESEARCH_NOTES.md`](RESEARCH_NOTES.md) để tìm hiểu chi tiết về t
 - Mnih et al. (2015) — *Human-level control through deep reinforcement learning* — Nature
 - Van Hasselt et al. (2016) — *Deep Reinforcement Learning with Double Q-learning* — AAAI
 - [flappy-bird-gymnasium](https://github.com/markub3327/flappy-bird-gymnasium)
-- [MediaPipe Hand Landmarker](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
 - [Spinning Up in Deep RL — OpenAI](https://spinningup.openai.com)
