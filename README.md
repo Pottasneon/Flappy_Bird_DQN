@@ -45,16 +45,13 @@ Dự án xây dựng một AI agent thông minh cho game Flappy Bird với hai m
 ┌──────────────────────────────────────────────────────────────┐
 │                     Flappy Bird AI                           │
 │                                                              │
-│   ┌──────────┐    ┌──────────────────┐    ┌──────────────┐  │
-│   │  Game    │───▶│  Observation     │───▶│  DQN Agent   │  │
-│   │ (Pygame) │    │  Vector (12 dim) │    │  (PyTorch)   │  │
-│   │          │◀───│  use_lidar=False │◀───│              │  │
-│   └──────────┘    └──────────────────┘    └──────────────┘  │
+│   ┌──────────┐    ┌──────────────────┐    ┌──────────────┐   │
+│   │  Game    │───▶│  Observation     │───▶│  DQN Agent   │   │
+│   │ (Pygame) │    │  Vector (12 dim) │    │  (PyTorch)   │   │
+│   │          │◀───│  use_lidar=False │◀───│              │   │
+│   └──────────┘    └──────────────────┘    └──────────────┘   │
 │                                                              │
-│   ┌──────────────────────────────────────────────────────┐   │
-│   │           Hand Gesture Mode (tùy chọn)               │   │
-│   │   Webcam → MediaPipe → HandController → Action {0,1} │   │
-│   └──────────────────────────────────────────────────────┘   │
+│                                                              │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -82,7 +79,6 @@ Mini-batch (128) → Double DQN Update → Target Network
 
 - Python 3.12+
 - macOS / Linux
-- Webcam (cho Hand Gesture Mode)
 
 ### Cài Đặt Môi Trường
 
@@ -102,7 +98,6 @@ pip install -r requirements.txt
 | `torch` | 2.x | Neural Network, DQN |
 | `gymnasium` | latest | RL environment |
 | `flappy-bird-gymnasium` | latest | Game environment |
-| `mediapipe` | 0.10.x | Hand gesture detection |
 | `opencv-python` | 4.x | Computer Vision, webcam |
 | `numpy` | latest | Tính toán |
 | `matplotlib` | latest | Visualize learning curves |
@@ -140,18 +135,6 @@ python src/main.py --evaluate --episodes 50 --agent dqn
 # Ghi 22 giây gameplay → videos/demo_gameplay.mp4
 python record_demo.py
 ```
-
-### 4. Điều Khiển Bằng Tay (Hand Gesture)
-
-```bash
-# Điều khiển Flappy Bird bằng cử động tay qua webcam
-python -m src.play_hand
-```
-
-**Gesture:**
-- 🖐️ **Mở bàn tay (≥ 3 ngón duỗi)** → FLAP (chim bay lên)
-- ✊ **Nắm tay (< 3 ngón duỗi)** → FALL (chim rơi)
-
 ### 5. Test Môi Trường
 
 ```bash
@@ -172,8 +155,6 @@ Flappy_bird_Project/
 │   │   └── __init__.py
 │   ├── environment/
 │   │   └── flappy_env.py         # Gymnasium wrapper (obs/frame mode)
-│   ├── gesture/
-│   │   └── hand_controller.py    # MediaPipe Hand Gesture Controller
 │   ├── training/
 │   │   ├── trainer.py            # Training loop (DQN-optimized)
 │   │   └── rewards.py            # Reward Shaping
@@ -185,7 +166,6 @@ Flappy_bird_Project/
 │   ├── utils/
 │   │   ├── logger.py             # CSV training logger
 │   │   └── visualization.py      # Matplotlib learning curves
-│   ├── play_hand.py              # Hand gesture gameplay entrypoint
 │   └── main.py                   # CLI entrypoint
 ├── checkpoints/
 │   ├── best_model.pt             # Model tốt nhất (score 17)
@@ -249,17 +229,6 @@ Pipeline CV ban đầu (dùng khi `use_obs=False`):
 | Contour Detection | Tìm viền vật thể |
 | Bounding Box | Lấy tọa độ chim và pipe |
 | EMA Velocity Estimation | Ước tính vận tốc chim qua 2 frames |
-
-### Hand Gesture Control (MediaPipe)
-
-| Thành phần | Chi tiết |
-|---|---|
-| Model | `hand_landmarker.task` (Google MediaPipe) |
-| Landmarks | 21 điểm 3D trên bàn tay |
-| API | MediaPipe Tasks API (>= 0.10) |
-| Gesture | Đếm ngón tay duỗi: ≥3 → FLAP, <3 → FALL |
-| Debounce | Cooldown 150ms giữa 2 lần flap |
-| FPS | ~30 FPS real-time |
 
 ---
 
