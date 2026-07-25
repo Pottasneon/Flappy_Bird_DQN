@@ -10,6 +10,15 @@
 **Ứng dụng Deep Reinforcement Learning (DQN) và Computer Vision vào game Flappy Bird.**  
 Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes.
 
+### 🎮 Demo Video
+
+<video width="400" controls>
+  <source src="videos/demo_gameplay_final.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+**🏆 Best Score: 17 pipes | 📊 Mean Score: 2.40**
+
 </div>
 
 ---
@@ -18,7 +27,7 @@ Agent tự học chơi game và đạt **best score 17 pipes** sau 3000 episodes
 
 Dự án xây dựng một AI agent thông minh cho game Flappy Bird với hai mô-đun chính:
 
-1. **Deep Q-Network (DQN)** — Agent tự học bằng Reinforcement Learning với Neural Network (PyTorch), sử dụng các kỹ thuật tiên tiến: Double DQN, Experience Replay, Target Network.
+1. **Deep Q-Network (DQN)** — Agent tự học bằng Reinforcement Learning với Neural Network (PyTorch), sử dụng các kỹ thuật tiên tiến: Double DQN, Experience Replay, Target Network
 2. **Hand Gesture Control** — Điều khiển con chim bằng cử động tay qua webcam (MediaPipe Tasks API).
 
 ### Kết Quả Đạt Được
@@ -275,23 +284,7 @@ Linear Q + CV (5000 ep):  ████░░░░░░░░░░░░░░
 DQN + Obs (3000 ep):      ████████████████████ max = 17
 ```
 
-> **Kết luận**: Chất lượng state representation (12-dim obs) quan trọng hơn độ phức tạp thuật toán. Chuyển từ CV (3 dims, noisy) → gym obs (12 dims, chính xác) cải thiện 17× chỉ với 60% số episodes.
-
----
-
-## Demo Video
-
-Video demo 22 giây gameplay của DQN agent:
-
-```bash
-open videos/demo_gameplay_final.mp4
-```
-
-Kết quả trong video:
-- Episode 1: score = 1
-- Episode 2: score = 2
-- Episode 4: **score = 5** ✅
-- Best episode: **score = 17** (trong training)
+> **Kết luận**: Chất lượng state representation (12-dim obs) quan trọng hơn độ phức tạp thuật toán. Chuyển từ CV (3 dims, noisy) → gym obs (12 dims, chính xác) cải thiện hiệu suất đáng kể.
 
 ---
 
