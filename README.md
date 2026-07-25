@@ -281,11 +281,13 @@ DQN + Obs (3000 ep):      ██████████████████
 
 ## Demo Video
 
-Video demo 22 giây gameplay của DQN agent:
+Click vào ảnh bên dưới để xem video demo gameplay của DQN agent:
 
-```bash
-open videos/demo_gameplay_final.mp4
-```
+<div align="center">
+
+[![Flappy Bird DQN Demo](https://img.youtube.com/vi/J0Cci3VAWKc/maxresdefault.jpg)](https://youtube.com/shorts/J0Cci3VAWKc)
+
+</div>
 
 Kết quả trong video:
 - Episode 1: score = 1
